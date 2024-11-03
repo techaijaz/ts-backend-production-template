@@ -3,6 +3,7 @@ import { ThhtpError } from '../types/types'
 import responceseMessage from '../constent/responceseMessage'
 import config from '../config/config'
 import { EApplicationEnvionment } from '../constent/application'
+import logger from './loger'
 
 export default (error: Error | unknown, req: Request, errorStatusCode: number = 500): ThhtpError => {
     const errorObj: ThhtpError = {
@@ -19,8 +20,7 @@ export default (error: Error | unknown, req: Request, errorStatusCode: number = 
     }
 
     // Log
-    // eslint-disable-next-line no-console
-    console.info('CONTROLLER_RESPONSE', {
+    logger.info('CONTROLLER_RESPONSE', {
         meta: errorObj
     })
 
