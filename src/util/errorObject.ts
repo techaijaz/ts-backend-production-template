@@ -1,12 +1,12 @@
 import { Request } from 'express'
-import { ThhtpError } from '../types/types'
+import { THttpError } from '../types/types'
 import responceseMessage from '../constent/responceseMessage'
 import config from '../config/config'
 import { EApplicationEnvionment } from '../constent/application'
 import logger from './loger'
 
-export default (error: Error | unknown, req: Request, errorStatusCode: number = 500): ThhtpError => {
-    const errorObj: ThhtpError = {
+export default (error: Error | unknown, req: Request, errorStatusCode: number = 500): THttpError => {
+    const errorObj: THttpError = {
         success: false,
         statusCode: errorStatusCode,
         request: {

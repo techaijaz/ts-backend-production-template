@@ -5,25 +5,40 @@ import config from '../config/config'
 import { EApplicationEnvionment } from '../constent/application'
 import path from 'path'
 import * as sourceMapSupport from 'source-map-support'
+import { blue, green, magenta, red, yellow } from 'colorette'
 
 //Linking trace support
 sourceMapSupport.install()
 
+const coloriseLevel = (level: string) => {
+    switch (level) {
+        case 'ERROR':
+            return red(level)
+        case 'INFO':
+            return blue(level)
+        case 'WARN':
+            return yellow(level)
+        default:
+            return level
+    }
+}
+
 const consoleFormate = format.printf((info) => {
     const { level, message, timestamp, meta } = info
-    const customLevel = level.toUpperCase()
-    const customTimestamp = timestamp
+    const customLevel = coloriseLevel(level.toUpperCase())
+    const customTimestamp = green(timestamp)
     const customMeta = util.inspect(meta, {
         showHidden: false,
-        depth: null
+        depth: null,
+        colors: true
     })
 
-    const customLog = `${customLevel} [${customTimestamp}] ${message} \n ${'META'} ${customMeta}\n`
+    const customLog = `${customLevel} [${customTimestamp}] ${message} \n ${magenta('META')} ${customMeta}\n`
     return customLog
 })
 
 const consoleTransport = (): Array<ConsoleTransportInstance> => {
-    if (config.ENV === EApplicationEnvionment.PRODUCTION) {
+    if (config.ENV === EApplicationEnvionment.DEVELOPMENT) {
         return [
             new transports.Console({
                 level: 'info',

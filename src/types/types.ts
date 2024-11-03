@@ -10,7 +10,7 @@ export type ThhtpResponse = {
     data: unknown
 }
 
-export type ThhtpError = {
+export type THttpError = {
     success: boolean
     statusCode: number
     request: {
