@@ -15,6 +15,7 @@ export default tseslint.config({
     extends: [eslint.configs.recommended, ...tseslint.configs.recommended, eslintConfiPrettier],
     rules: {
         'no-console': 'error',
+        'no-useless-catch': 0,
         quotes: [
             'error',
             'single',

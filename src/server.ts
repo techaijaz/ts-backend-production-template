@@ -1,11 +1,19 @@
 import config from './config/config'
 import app from './app'
 import logger from './util/loger'
+import databseService from './service/databseService'
 
 const server = app.listen(config.PORT, () => {})
 
-;(() => {
+;(async () => {
     try {
+        const connection = await databseService.connect()
+
+        logger.info('DATABASE CONNECZTION', {
+            meta: {
+                CONNECTION_NAME: connection.name
+            }
+        })
         logger.info('APPLICATION STARTED', {
             meta: {
                 PORT: config.PORT,
