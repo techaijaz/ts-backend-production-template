@@ -9,7 +9,7 @@ const server = app.listen(config.PORT, () => {})
     try {
         const connection = await databseService.connect()
 
-        logger.info('DATABASE CONNECZTION', {
+        logger.info('DATABASE CONNECTION', {
             meta: {
                 CONNECTION_NAME: connection.name
             }
